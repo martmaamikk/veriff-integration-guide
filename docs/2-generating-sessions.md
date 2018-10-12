@@ -36,15 +36,15 @@ Then use HTTP POST to send the object to https://api.veriff.me/v1/sessions, with
 
 In response, we give you a JSON  session ID and a URL, as follows:
 
-{
-    "status": "success",
-    "verification":{
-        "id":"f04bdb47-d3be-4b28-b028-............",
-        "url": "https://magic.veriff.me/v/sample-url.................",
-        "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJh............",
-        "baseUrl": "https://magic.veriff.me"
+    {
+        "status": "success",
+        "verification":{
+            "id":"f04bdb47-d3be-4b28-b028-............",
+            "url": "https://magic.veriff.me/v/sample-url.................",
+            "sessionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJh............",
+            "baseUrl": "https://magic.veriff.me"
+        }
     }
-}
 
 
 The URL of the KYC session is where you should redirect your user in your web front end.
