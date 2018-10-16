@@ -123,3 +123,15 @@ This process depends on the language you use.
 
 ## Postman samples
 -->
+
+
+## API upload
+
+If you do not wish to use Veriff's native SDK or Veriff's web interface to KYC your customers, you can implement your own front-end completely, and then talk to our API according to the documentation.  The steps using the API are:
+
+1) open new session for a customer according to https://developers.veriff.me/#sessions_post
+2) send photos (face, document front, document back, etc) https://developers.veriff.me/#sessions__sessionid__media_post
+3) submit session for review https://developers.veriff.me/#sessions__sessionid__patch
+4) wait for webhook response by implementing a listener according to https://developers.veriff.me/#webhooks_decision_post
+
+That way, you will not use Veriff's front end at all.
