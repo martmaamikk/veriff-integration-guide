@@ -24,16 +24,18 @@ There are two ways to do this:
 
 The easiest way is to track the session ID provided by Veriff during session creation.  All future event and decision notifications refer to the session ID.  The session ID is unique for each session, and it can be used to look up sessions in the administrative interface at https://office.veriff.me
 
-The other way is to provide Veriff with your internal customer ID, or some other key that uniquely identifies your customer.  Please bear in mind, that it is technically possible for one customer to be associated 
+The other way is to provide Veriff with your internal customer ID, or some other key that uniquely identifies your customer.  You can store your identifier in the vendorData element as a string, and we will send it back to you in webhook notifications.  Please bear in mind that it is technically possible for one customer to be associated with multiple verification sessions, and this could potentially create ambiguous situations in code, if you are only recognizing customers by your own identifier, and not Veriff's session ID.
 
 ## Handling security
 
-It is important to be certain that 
+It is important to check that the webhook responses do indeed originate from Veriff.
 
-You can secure the URL in three ways:
-- having a good secure SSL server for your webhook listener (we only send over HTTPS to servers with a publicly verifiable certificate)
-- checking the X-AUTH-CLIENT and X-SIGNATURE headers on the decision webhook (the signature is calculated using the API secret that only you and Veriff know)
-- finally, if you are really-really suspicious, you may restrict your webhook listener to only accept calls from the Veriff IP range
+You can secure the webhook listener URL in three ways:
+- have a good secure SSL server for your webhook listener (Veriff will call only to HTTPS URLs, to servers with a publicly verifiable certificate)
+- check the X-AUTH-CLIENT and X-SIGNATURE headers on the decision webhook (the signature is calculated using the API secret that only you and Veriff know)
+- finally, if you are really suspicious, you may restrict your webhook listener to only accept calls from the Veriff IP range (please ask your Veriff integration onboarding specialist for those details)
+
+## Different webhook calls
 
 The difference between the URLs is as follows:
 - the Decision Webhook Url is where we post decisions about verifications (approved, declined, resubmission_required, expired, abandoned, etc)
@@ -41,10 +43,8 @@ The difference between the URLs is as follows:
 - finally, there is a Callback URL, which is actually the redirect URL for the user on the web site at the end of KYC
 
 
+## Meaning of the various verification responses
 
-- can you explain the difference between the 2 url (event)
-
-# What do the various verification responses mean
 We give a positive conclusive decision (status approved, code 9001)  when the user has provided us with:
 - photos and video uploaded to us
 - the document is readable and matches the user's name as provided by the customer
