@@ -6,7 +6,7 @@ Once you have determined the URL of the listener, it is possible to configure it
 In case you want to test web hooks before the mobile app fully working, it is possible to hand generate verification sessions in the back office (Verifications / Generated tokens / Generate session and then following the URL for a web-based verification session, which will post the result to your webhook)
 
 
-# Configuring the webhook endpoint
+## Configuring the webhook endpoint
 
 Go to Veriff's back office, Management -> Vendors -> Edit, and set 'Decision notification url' to the URL where your server will be listening for decision notifications from Veriff.  Veriff will post decision notifications of verification results to this URL.  Only HTTPS URLs are allowed.
 
@@ -14,6 +14,35 @@ If there is a network connectivity issue or technical issue with delivering the 
 
 The full description of the webhook format is at https://developers.veriff.me/#webhooks_decision_post
 
+## Recognizing your customer
+
+When your server receives a decision notification from Veriff, you have to figure out, which customer is it about.
+
+There are two ways to do this:
+  1) using the Veriff session ID, or
+  2) using your own customer ID.
+
+The easiest way is to track the session ID provided by Veriff during session creation.  All future event and decision notifications refer to the session ID.  The session ID is unique for each session, and it can be used to look up sessions in the administrative interface at https://office.veriff.me
+
+The other way is to provide Veriff with your internal customer ID, or some other key that uniquely identifies your customer.  Please bear in mind, that it is technically possible for one customer to be associated 
+
+## Handling security
+
+It is important to be certain that 
+
+You can secure the URL in three ways:
+- having a good secure SSL server for your webhook listener (we only send over HTTPS to servers with a publicly verifiable certificate)
+- checking the X-AUTH-CLIENT and X-SIGNATURE headers on the decision webhook (the signature is calculated using the API secret that only you and Veriff know)
+- finally, if you are really-really suspicious, you may restrict your webhook listener to only accept calls from the Veriff IP range
+
+The difference between the URLs is as follows:
+- the Decision Webhook Url is where we post decisions about verifications (approved, declined, resubmission_required, expired, abandoned, etc)
+- the Event Webhook Url is where we post events during the lifecycle of a verification (started, submitted, etc)
+- finally, there is a Callback URL, which is actually the redirect URL for the user on the web site at the end of KYC
+
+
+
+- can you explain the difference between the 2 url (event)
 
 # What do the various verification responses mean
 We give a positive conclusive decision (status approved, code 9001)  when the user has provided us with:
