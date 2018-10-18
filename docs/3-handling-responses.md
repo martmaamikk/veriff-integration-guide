@@ -35,6 +35,19 @@ You can secure the webhook listener URL in three ways:
 - check the X-AUTH-CLIENT and X-SIGNATURE headers on the decision webhook (the signature is calculated using the API secret that only you and Veriff know)
 - finally, if you are really suspicious, you may restrict your webhook listener to only accept calls from the Veriff IP range (please ask your Veriff integration onboarding specialist for those details)
 
+
+When Veriff calls your webhook endpoint, we use the same logic of X-SIGNATURE generation on our calls to you, as on your calls to us.  So, when we call your endpoint for any notification URL, we set the X-AUTH-CLIENT http header to your API key, and we set the X-SIGNATURE header to the hex encoded sha256 digest of the request body and the secret.
+
+When you accept a webhook call from us, you need to proceed as follows:
+1) compare the X-AUTH-CLIENT header to your api key, if different -> **fail** with error 
+2) access the http request body (before it is parsed)
+3) calculate the sha256 digest of the request body string + api secret
+4) compare the hex encoded digest with the X-SIGNATURE header, if different -> **fail** with error
+5) only now you should parse the request body JSON object
+
+The calculation for X-SIGNATURE is following the same algorithm as for session generation.
+
+
 ## Different webhook calls
 
 The difference between the URLs is as follows:
