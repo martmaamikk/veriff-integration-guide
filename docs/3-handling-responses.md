@@ -58,6 +58,24 @@ The difference between the URLs is as follows:
 
 ## Meaning of the various verification responses
 
+Verification status is one of 
+- approved
+- resubmission_requested
+- declined
+- expired
+- abandoned
+  
+Verification response code is one of 9001, 9102, 9103, 9104, 9151, 9161
+
+Explanation of the meaning of the response codes: 
+- **9001** : Positive: Person was verified. The verification process is complete. Accessing the sessionURL again will show the client that nothing is to be done here.
+- **9102** : Negative: Person has not been verified. The verification process is complete. Either it was a fraud case or some other severe reason that the person can not be verified. You should investigate the session further and read the "reason". If you decide to give the client another try you need to create a new session.
+- **9103** : Resubmitted: Resubmission has been requested. The verification process is not completed. Something was missing from the client and she or he needs to go through the flow once more. The same sessionURL can and should be used for this purpose.
+- **9104** : Negative: Verification has been expired. The verification process is complete. After 7 days the session get's expired. If the client started the verification process we reply "abandoned" here, otherwise if the client never arrived in our environment the status will be "expired"
+- **9151** : Intermediate Positive: SelfID was successful - this code is only send if the configuration flag is set
+- **9161** : Intermediate Positive: Video Call was successful - this code is only send if the configuration flag is set'
+
+
 We give a positive conclusive decision (status approved, code 9001)  when the user has provided us with:
 - photos and video uploaded to us
 - the document is readable and matches the user's name as provided by the customer
