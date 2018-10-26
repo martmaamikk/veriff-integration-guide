@@ -75,6 +75,7 @@ Explanation of the meaning of the response codes:
 - **9151** : Intermediate Positive: SelfID was successful - this code is only send if the configuration flag is set
 - **9161** : Intermediate Positive: Video Call was successful - this code is only send if the configuration flag is set'
 
+### Preconditions for approval decisions
 
 We give a positive conclusive decision (status approved, code 9001)  when the user has provided us with:
 - photos and video uploaded to us
@@ -84,20 +85,34 @@ We give a positive conclusive decision (status approved, code 9001)  when the us
 - the document is valid (dates, etc)
 A positive decision means that the person was verified. The verification process is complete. Accessing the KYC session URL again will tell the user that nothing more is to be done.
 
+### Reasons for negative conclusive decisions
+
 We give a negative conclusive decision (status declined, code 9102) when
-- No physical document was used
-- The document was unrecognizable
-- The document was invalid (expired)
-- The document was damaged
-- The person did not match the document
+
+- The name entered and the name on the document do not match.
+- A physical ID document was not used.
+- Document is damaged.
+- Document has signs of tampering.
+- Video has signs of tampering.
+- Document is expired.
+- No matching document specimen available.
+- The person showing the document does not look the same as on the document photo.
+- The person displays signs of being intoxicated.
+
  A negative decision means that the person has not been verified. The verification process is complete. Either it was a fraud case or some other severe reason that the person can not be verified. You should investigate the session further and read the "reason". If you decide to give the client another try you need to create a new session.
 
+### Reasons for inconclusive decisions
+
 We give an inconclusive decision (status resubmission_requested, code 9103), when
-- All necessary photos exist, but some data or the face are unrecognizable due to low quality
-- insufficient lighting
-- distracting factors
-- there were mistakes during the verification process
-- wrong type of document
-- the person is not alone during verification
-A resubmission requested decision means that the verification process is not completed. Something was missing from the user and they need to go through the flow once more. The same session URL can and should be used for this purpose.
+
+- Photos necessary for identification are missing.
+- The face is not clearly visible on the portrait photo.
+- The document is not fully in frame.
+- Document data is unreadable due to bad quality.
+- Document data is unreadable due to being partially covered.
+- Document type is not supported.
+- The process of showing the document was not completed independently.
+- The name entered and the name on the document do not match.
+
+An inconclusive (resubmission requested) decision means that the verification process is not completed. Something was missing from the user and they need to go through the flow once more. The same session URL can and should be used for this purpose.
 
