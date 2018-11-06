@@ -116,3 +116,22 @@ We give an inconclusive decision (status resubmission_requested, code 9103), whe
 
 An inconclusive (resubmission requested) decision means that the verification process is not completed. Something was missing from the user and they need to go through the flow once more. The same session URL can and should be used for this purpose.
 
+## Meaning of the various event codes
+
+The event webhook informs you about the progress of the verification.  However, it does not inform you of the decision.    
+
+The event code can be one of:
+- '**7001** : Started
+- '**7002** : Submitted
+- '**7003** : Tier 1 approved
+
+
+Example
+
+    {
+      "id": "f04bdb47-d3be-4b28-b028-a652feb060b5",
+      "feature": "selfid",
+      "code": 7003,
+      "action": "tier_1_approved"
+    }
+
