@@ -89,6 +89,7 @@ A positive decision means that the person was verified. The verification process
 
 We give a negative conclusive decision (status declined, code 9102) when
 
+- Document type is not supported.
 - The name entered and the name on the document do not match.
 - A physical ID document was not used.
 - Document is damaged.
@@ -110,9 +111,7 @@ We give an inconclusive decision (status resubmission_requested, code 9103), whe
 - The document is not fully in frame.
 - Document data is unreadable due to bad quality.
 - Document data is unreadable due to being partially covered.
-- Document type is not supported.
 - The process of showing the document was not completed independently.
-- The name entered and the name on the document do not match.
 
 An inconclusive (resubmission requested) decision means that the verification process is not completed. Something was missing from the user and they need to go through the flow once more. The same session URL can and should be used for this purpose.
 
