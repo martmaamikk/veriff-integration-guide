@@ -134,3 +134,19 @@ Example
       "action": "tier_1_approved"
     }
 
+## Storing verification media
+
+You can automate the download of photo and video files associated with a completed verification.
+
+First, query for a list of files using a GET request to
+
+    /sessions/{sessionId}/media
+
+The response will be a list of videos and images as described at https://developers.veriff.me/#sessions__sessionid__media_get
+
+Second, you can then download each individual media file, using the media ID returned in the first step, with a GET request to
+
+    /media/{mediaId}
+
+
+The description of the request and response is at https://developers.veriff.me/#media__mediaid__get
