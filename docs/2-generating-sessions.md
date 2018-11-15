@@ -17,7 +17,7 @@ You can see all the completed sessions from the menu “Dashboard”
 
 
 
-## Generating sessions using JavaScript
+## Generating sessions in code
 
 The simplest way to get a KYC link for your user on the web, is to make a simple JSON object containing the user's name and the redirect(callback) URL to which the user will be sent after they complete KYC.
 Then use HTTP POST to send the object to https://api.veriff.me/v1/sessions, with Content-Type application/json and the X-AUTH-CLIENT header containing your API Key.
@@ -123,6 +123,37 @@ This process depends on the language you use.
 
 ## Postman samples
 -->
+
+
+## Using Veriff in an iFrame
+
+You can use Veriff in an iFrame.  It should fit in a 1000px x 650px frame.  This is an example for creating the iframe with the session URL:
+
+    var vf = document.createElement('iframe');
+    vf.src = response.verification.url; /* URL here */
+    vf.allow = 'microphone; camera';
+    vf.width = 1000;
+    vf.height = 650;
+    document.body.appendChild(iframe);
+
+At the end of the verification, Veriff will send an event to the parent window using JavaScript postMessage.  You could use something as follows to catch the event and proceed:
+
+    /* addEventListener support for IE8 */
+    function bindEvent(element, eventName, eventHandler) {
+      if (element.addEventListener) {
+        element.addEventListener(eventName, eventHandler, false);
+      } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, eventHandler);
+      }
+    }
+
+    /* Listen to message from child window */
+    bindEvent(window, 'message', function (e) {
+      if (e.data && e.data.status && e.data.status === 'finished') {
+        /* do whatever */
+        document.getElementById('iframe').remove();
+      }
+    });
 
 
 ## API upload
