@@ -75,6 +75,14 @@ Explanation of the meaning of the response codes:
 - **9151** : Intermediate Positive: SelfID was successful - this code is only send if the configuration flag is set
 - **9161** : Intermediate Positive: Video Call was successful - this code is only send if the configuration flag is set'
 
+### Lifecycle of the verification session
+
+Responses 9001, 9102, and 9104 are *conclusive* responses.  The session is closed and the URL is *not* available for the end user.
+
+Response 9103 is an *inconclusive* response.  The session remains open until you receive one of the above conclusive responses.  The session is re-opened for the end user, accepting a new attempt.
+
+Responses 9151 and 9161 are *intermediate* responses.  The session is being processed, it is not open for the end user, and you will soon receive one of the above conclusive or inconclusive responses.
+
 ### Preconditions for approval decisions
 
 We give a positive conclusive decision (status approved, code 9001)  when the user has provided us with:
