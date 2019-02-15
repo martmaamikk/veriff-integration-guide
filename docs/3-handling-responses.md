@@ -96,12 +96,13 @@ A positive decision means that the person was verified. The verification process
 ### Reasons for negative conclusive decisions
 
 Starting from 18.02.19 we give a negative conclusive decision (status declined, code 9102) when
-- A physical document wasn't used
-- Suspicion of tampering
-- The person showing the document does not look the same as on the document photo
-- The name entered and the name on the document do not match 
+- Physical document not used
+- Suspected document tampering
+- Person showing the document does not appear to match document photo
+- Name entered does not match name on document
 - Suspicious behaviour
 - Known fraud
+
 
 (Legacy decline reasons before 18.02.19)
 - Document type is not supported.
@@ -121,13 +122,13 @@ Starting from 18.02.19 we give a negative conclusive decision (status declined, 
 
 Starting from 18.02.19 we give an inconclusive decision (status resubmission_requested, code 9103), when
 
-- Photos and/or video is missing
-- The face is not clearly visible
-- Full document is not visible
-- Bad image quality 
-- Document is damaged
-- Document type is not supported
-- Document is expired
+- Video and/or photos missing
+- Face not clearly visible
+- Full document not visible
+- Poor image quality
+- Document damaged
+- Document type not supported
+- Document expired
 
 (Legacy inconclusive decisions before 18.02.19)
 - Photos necessary for identification are missing.
