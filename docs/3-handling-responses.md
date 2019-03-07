@@ -101,6 +101,7 @@ Starting from 18.02.19 we give a negative conclusive decision (status declined, 
 - Person showing the document does not appear to match document photo
 - Name entered does not match name on document
 - Suspicious behaviour
+- Velocity/abuse
 - Known fraud
 
 
