@@ -1,3 +1,10 @@
+---
+owner: "Customer Tools"
+description: "Getting started guide with Veriff integration"
+status: "production"
+type: "documentation"
+---
+
 # Veriff Integration Guide
 
 
