@@ -1,5 +1,5 @@
 ---
-owner: "Customer Tools"
+owner: "Client Tools"
 description: "Getting started guide with Veriff integration"
 status: "production"
 type: "documentation"
