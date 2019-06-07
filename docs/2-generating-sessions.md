@@ -156,52 +156,5 @@ At the end of the verification, Veriff will send an event to the parent window u
     });
 
 
-## API upload
-
-There are a few scenarios where you may not wish to use Veriff's native SDK or Veriff's web interface to verify your customers.  For example:
-- you wish to completely implement your own front-end
-- you wish to do an offline bulk audit of previously verified customers
-
-In those cases, you can do the whole process using our API, according to the documentation, and not show any Veriff front end to your customers, or not expect customers to be present for the verification.
-
-Here are the steps you should do to use the API for upload.
-
-### Create a new verification session
-
-Create a new verification session using POST request to ‘/sessions’
-
-The goal here is to create a new object (a verification session) that contains the one verification (referred to as 'verification', nested inside the session object in the response).
-
-If you wish to restrict the accepted document to be the one you have on file, you can also send the document type, country, and number along with the session.  Document type can be one of [‘PASSPORT’, ‘ID_CARD’, ‘RESIDENCE_PERMIT’, ‘DRIVERS_LICENSE'].
-
-Documentation: https://developers.veriff.me/#sessions_post
-
-### Send photos
-
-Send photos (face, document front, document back, etc) by uploading all the pictures one by one using POST request to ‘/media’
-
-The goal here is to upload the required photos and associate them with the verification created in step 1.
-
-Documentation: https://developers.veriff.me/#sessions__sessionid__media_post
-
-### Submit session for review
-
-Submit the verification session using PATCH request to ‘/sessions/:id’
-
-Once all the photos are uploaded, you would then update (PATCH) the verification to mark it into 'submitted' status. This marks the completion of the verification. This step requires all the photos to be submitted prior to triggering this.
-
-Documentation: https://developers.veriff.me/#sessions__sessionid__patch
-
-After these three steps, you've done your part, and the verification will then be taken care of by us.
-
-### Wait for webhook response
-
-Veriff sends you a Decision event via Webhook using POST request.  You will have to implement the listener.
-
-This hook will be sent back asynchronously, and it contains more data, including the verified identity information.
-
-Documentation: https://developers.veriff.me/#webhooks_decision_post
-
-The web hook is sent to the URL that is configurable from the Back office under Management › Vendor › Integrations.
 
 More info and code samples are in our public github repo at https://github.com/Veriff/js-integration-demo
